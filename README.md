@@ -33,12 +33,6 @@ métricas obtidas durante o treinamento do modelo:
 
 
 
-- ## processando os dados
-- aqui carregamos o dataset
-- ``` import pandas as pd
-df = pd.read_csv('dataset.csv')
-
-
 
 
 

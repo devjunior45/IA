@@ -25,11 +25,13 @@ métricas obtidas durante o treinamento do modelo:
 - ## 🎲 dataset
 - o dataset deste modelo, se trata de um arquivo csv com as coordenadas  referente a cada letra, são 63 valores (21 landmarks × 3 coordenadas) retiradas de cada imagem, e rotuladas com seu respectivo  valor(letra).
 - exemplo a seguir:
+
 | Índice | x           | y             | z          |
 |--------|------------|---------------|------------|
 | 0      | 9.77e-07   | 9.1255557e-07 | 9.127e-07  |
 | ...    | ...        | ...           | ...        |
 | 21     | 9.77e-07   | 9.77e-07      | 9.77e-07   |
+
 
 
 

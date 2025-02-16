@@ -33,17 +33,37 @@ métricas obtidas durante o treinamento do modelo:
 | 21     | 9.77e-07   | 9.77e-07      | 9.77e-07   |
 
 
-## 📂 Processando os Dados  
+## Processando os Dados  
 
-Aqui carregamos o dataset para análise:  
+Aqui carregamos o dataset, e dividimos os dados em  treino e teste, obtendo a quantidade de dados em cada parte.
 
 ```python
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from tensorflow.keras.utils import to_categorical
 
 # Carregar o dataset
 df = pd.read_csv('dataset.csv')
 
 
+# Separar features (características) e rótulos
+X = df.iloc[:, :-1].values  # Todas as colunas, exceto a última
+y = df['label'].values      # Última coluna (rótulos)
+
+# Codificar os rótulos para números
+codificador_rotulos = LabelEncoder()
+y_codificado = codificador_rotulos.fit_transform(y)  # Converte rótulos para números (ex: 'A' -> 0, 'B' -> 1)
+
+# Converter rótulos para one-hot encoding
+y_one_hot = to_categorical(y_codificado)
+
+# Dividir em conjuntos de treino e teste
+X_treino, X_teste, y_treino, y_teste = train_test_split(X, y_one_hot, test_size=0.2, random_state=42)
+
+print("Formato dos dados:")
+print(f"X_treino: {X_treino.shape}, y_treino: {y_treino.shape}")
+print(f"X_teste: {X_teste.shape}, y_teste: {y_teste.shape}")
 
 
 

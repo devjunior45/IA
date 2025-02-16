@@ -32,6 +32,7 @@ métricas obtidas durante o treinamento do modelo:
 | 21     | 9.77e-07   | 9.77e-07      | 9.77e-07   |
 
 
+
 - ## processando os dados
 - aqui carregamos o dataset
 - ``` import pandas as pd

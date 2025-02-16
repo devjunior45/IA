@@ -87,7 +87,17 @@ modelo.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accu
 # Resumo do modelo
 modelo.summary()
 ```
-
+## Treinamento
+- agora treinamos o modelo utilizandos 50 épocas, com lotes de 32 por vez
+```
+historico = modelo.fit(
+    X_treino, y_treino,
+    epochs=50,  # Número de épocas
+    batch_size=32,  # Tamanho do lote
+    validation_data=(X_teste, y_teste),  # Dados de validação
+    verbose=1  # Mostrar progresso
+)
+```
 
 
 

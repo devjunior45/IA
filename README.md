@@ -66,6 +66,29 @@ print(f"X_treino: {X_treino.shape}, y_treino: {y_treino.shape}")
 print(f"X_teste: {X_teste.shape}, y_teste: {y_teste.shape}")
 
 
+## Criando um novo modelo
+- aqui criamos um modelo usando tecnicas de ativação relu e softmax
+```
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
+
+
+modelo = Sequential([
+    Dense(128, activation='relu', input_shape=(X_treino.shape[1],)),  # Camada de entrada
+    Dropout(0.2),  # Regularização para evitar overfitting
+    Dense(64, activation='relu'),  # Camada oculta
+    Dropout(0.2),
+    Dense(32, activation='relu'),  # Outra camada oculta
+    Dense(y_one_hot.shape[1], activation='softmax')  # Camada de saída (softmax para classificação)
+])
+
+# Compilar o modelo
+modelo.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+# Resumo do modelo
+modelo.summary()
+
+
 
 
 

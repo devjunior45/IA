@@ -64,13 +64,12 @@ X_treino, X_teste, y_treino, y_teste = train_test_split(X, y_one_hot, test_size=
 print("Formato dos dados:")
 print(f"X_treino: {X_treino.shape}, y_treino: {y_treino.shape}")
 print(f"X_teste: {X_teste.shape}, y_teste: {y_teste.shape}")
-
+```
 
 ## Criando um novo modelo
-- aqui criamos um modelo usando tecnicas de ativação relu e softmax
-```
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout
+- aqui criamos um modelo usando tecnicas de ativação relu e softmax, e obtemos um resumo das camadas
+```from tensorflow.keras.models import Sequential
+   from tensorflow.keras.layers import Dense, Dropout
 
 
 modelo = Sequential([
@@ -87,6 +86,7 @@ modelo.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accu
 
 # Resumo do modelo
 modelo.summary()
+```
 
 
 

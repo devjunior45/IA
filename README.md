@@ -22,6 +22,17 @@ métricas obtidas durante o treinamento do modelo:
 - **Loss no Treinamento**: 0.0819
 - **Loss na Validação**: 0.0680
 
+- ## 🎲 dataset
+- o dataset deste modelo, se trata de um arquivo csv com as coordenadas  referente a cada letra, são 63 valores (21 landmarks × 3 coordenadas) retiradas de cada imagem, e rotuladas com seu respectivo  valor(letra).
+- exemplo a seguir:
+- ``` 
+   | x           |    y          | z        |
+   |-------------|---------------|----------|
+0  | 9.77e-07    | 9.1255557e-0  | 9.127e-07|
+...| ...         | ...           | ...      |
+21 | 9.77e-07    | 9.77e-07       | 9.77e-07 |
+
+
 
 
 

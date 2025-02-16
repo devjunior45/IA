@@ -11,7 +11,19 @@ Este projeto permite, capturar coordenadas das mãos utilizando mediapipe e reco
 ## 📂 Estrutura do Projeto
 - `dataset/` → coordenadas das maos geradas por imagens, em arquivo .CSV 
 - `models/` → Modelo treinado e salvo
-- `src/` → Código-fonte utilizado para treinamento do modelo 
+- `src/` → Código-fonte utilizado para treinamento do modelo
+
+- ## 📊 Resultados e Estatísticas
+
+métricas obtidas durante o treinamento do modelo:
+
+- **Acurácia no Treinamento**: 97.54%
+- **Acurácia na Validação**: 98.18%
+- **Loss no Treinamento**: 0.0819
+- **Loss na Validação**: 0.0680
+
+
+
 
 
 

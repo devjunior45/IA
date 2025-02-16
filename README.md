@@ -67,7 +67,7 @@ print(f"X_teste: {X_teste.shape}, y_teste: {y_teste.shape}")
 ```
 
 ## Criando um novo modelo
-- aqui criamos um modelo usando tecnicas de ativação relu e softmax, e obtemos um resumo das camadas
+- aqui criamos um modelo de rede neural com sequential usando funçoes de ativação relu e softmax, e obtemos um resumo do modelo.
 ```from tensorflow.keras.models import Sequential
    from tensorflow.keras.layers import Dense, Dropout
 

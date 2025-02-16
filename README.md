@@ -33,9 +33,17 @@ métricas obtidas durante o treinamento do modelo:
 | 21     | 9.77e-07   | 9.77e-07      | 9.77e-07   |
 
 
-- ## processando os dados
-- aqui carregamos o dataset
-- ``` import pandas as pd df = pd.read_csv('dataset.csv')
+## 📂 Processando os Dados  
+
+Aqui carregamos o dataset para análise:  
+
+```python
+import pandas as pd
+
+# Carregar o dataset
+df = pd.read_csv('dataset.csv')
+
+
 
 
 

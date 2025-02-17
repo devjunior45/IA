@@ -10,19 +10,19 @@ dicionario_gestos = {
     17: 'U', 18: 'V', 19: 'W', 20: 'Y'
 }
 
-# Carregar o modelo TensorFlow Lite
+# Carregando o modelo TensorFlow Lite
 interpretador = tf.lite.Interpreter(model_path='modelolibraslite.tflite')
 interpretador.allocate_tensors()
 
-# Obter detalhes de entrada/saída
+# detalhes de entrada/saída
 detalhes_entrada = interpretador.get_input_details()
 detalhes_saida = interpretador.get_output_details()
 
-# Inicializar MediaPipe Hands
+# carregar MediaPipe Hands
 mp_maos = mp.solutions.hands
 maos = mp_maos.Hands()
 
-# Capturar vídeo da webcam
+# Capturando um video ja salvo, 0 para camera
 captura = cv2.VideoCapture("caminho video, 0 para a camera")
 
 while captura.isOpened():
@@ -34,10 +34,10 @@ while captura.isOpened():
     # Converter a imagem para RGB
     imagem_rgb = cv2.cvtColor(imagem, cv2.COLOR_BGR2RGB)
     
-    # Processar a imagem com MediaPipe Hands
+    # Processando a imagem 
     resultados = maos.process(imagem_rgb)
 
-    # Verificar se as mãos foram detectadas
+    # Verifica se as mãos foram detectadas
     if resultados.multi_hand_landmarks:
         for marcos_mao in resultados.multi_hand_landmarks:
             # Extrair coordenadas dos landmarks
@@ -45,7 +45,7 @@ while captura.isOpened():
             for marco in marcos_mao.landmark:
                 coordenadas.extend([marco.x, marco.y, marco.z])
             
-            # Preparar os dados para o modelo
+            # Preparando os dados 
             dados_entrada = np.array([coordenadas], dtype=np.float32)
             
         
@@ -53,7 +53,7 @@ while captura.isOpened():
             interpretador.invoke()
             dados_saida = interpretador.get_tensor(detalhes_saida[0]['index'])
             
-            # prever a letra
+            # prevendo  a letra
             classe_prevista = np.argmax(dados_saida, axis=1)
             rotulo_previsto = dicionario_gestos.get(classe_prevista[0], 'Desconhecido')  # Traduzir número para letra
             
@@ -62,11 +62,11 @@ while captura.isOpened():
             cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 3)  
 
 
-            # Desenhar os landmarks na imagem
+            # Desenhando os landmarks 
             mp.solutions.drawing_utils.draw_landmarks(
                 imagem, marcos_mao, mp_maos.HAND_CONNECTIONS)
 
-    # Mostrar a imagem
+    # imagem
     cv2.imshow('Reconhecimento de Gestos', imagem)
     if cv2.waitKey(5) & 0xFF == 27:  # Pressione ESC para sair
         break

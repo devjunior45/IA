@@ -111,7 +111,8 @@ print("\nModelo salvo com sucesso!")
 ```
 
 ## Interface
--criamos uma simples interface, para fazer a previsão das letras
+-criamos uma simples interface, para fazer a previsão das letras, e carregamosm o mediapipe, para extraçao dos marcos.
+- observação, neste codigo o modelo foi convertido usando o modo lite do tensorflow
 
 ```
 import cv2

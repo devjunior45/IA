@@ -47,7 +47,7 @@ from tensorflow.keras.utils import to_categorical
 df = pd.read_csv('dataset.csv')
 
 
-# Separar features (características) e rótulos
+# Separando características e rótulos
 X = df.iloc[:, :-1].values  # Todas as colunas, exceto a última
 y = df['label'].values      # Última coluna (rótulos)
 
@@ -58,7 +58,7 @@ y_codificado = codificador_rotulos.fit_transform(y)  # Converte rótulos para n�
 # Converter rótulos para one-hot encoding
 y_one_hot = to_categorical(y_codificado)
 
-# Dividir em conjuntos de treino e teste
+# Dividindo  em  treino e teste
 X_treino, X_teste, y_treino, y_teste = train_test_split(X, y_one_hot, test_size=0.2, random_state=42)
 
 print("Formato dos dados:")
@@ -81,7 +81,7 @@ modelo = Sequential([
     Dense(y_one_hot.shape[1], activation='softmax')  # Camada de saída (softmax para classificação)
 ])
 
-# Compilar o modelo
+# Compilando o modelo
 modelo.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Resumo do modelo
@@ -95,7 +95,7 @@ historico = modelo.fit(
     epochs=50,  # Número de épocas
     batch_size=32,  # Tamanho do lote
     validation_data=(X_teste, y_teste),  # Dados de validação
-    verbose=1  # Mostrar progresso
+    verbose=1  # progresso
 )
 
  #Resultado do aprendizado

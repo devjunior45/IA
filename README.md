@@ -5,8 +5,8 @@
 ![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green)
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-0.9.3-red)
 
-Este projeto usa **Python, OpenCV, mediapipe e TensorFlow** como bibliotecas principais, para reconhecer algumas letras do  alfabeto em Libras a partir de coordenadas geradas por imagens.  
-Este projeto permite, capturar coordenadas das mãos utilizando mediapipe e reconhecer letras do alfabeto, utilizando tecnicas de DEEP LEARNING.
+Este projeto utiliza **Python, OpenCV, mediapipe e TensorFlow** como bibliotecas principais para reconhecer algumas letras do  alfabeto em Libras a partir de coordenadas geradas por imagens.  
+Este projeto, permite capturar coordenadas das mãos utilizando mediapipe, e reconhecer letras do alfabeto utilizando tecnicas de DEEP LEARNING.
 
 ## 📂 Estrutura do Projeto
 - `dataset/` → coordenadas das maos geradas por imagens, em arquivo .CSV 

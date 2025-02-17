@@ -88,7 +88,7 @@ modelo.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accu
 modelo.summary()
 ```
 ## Treinamento
-- agora treinamos o modelo utilizandos 50 épocas, com lotes de 32 por vez
+- agora treinamos o modelo utilizandos 50 épocas, com lotes de 32 por vez, e obtemos o resultado  do aprendizado.
 ```
 historico = modelo.fit(
     X_treino, y_treino,
@@ -97,7 +97,17 @@ historico = modelo.fit(
     validation_data=(X_teste, y_teste),  # Dados de validação
     verbose=1  # Mostrar progresso
 )
+
+# resultado do aprendizado
+perda, acuracia = modelo.evaluate(X_teste, y_teste, verbose=0)
+print(f"\nAcurácia no conjunto de teste: {acuracia * 100:.2f}%")
+
 ```
+
+## Salvando o modelo 
+- agora salvamos o modelo.
+- ``` modelo.save('modelo_libras.h5')
+print("\nModelo salvo com sucesso!")
 
 
 

@@ -8,19 +8,19 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout
 import pickle
 
-# 2. Carregamento dos Dados
-# Carregar o dataset
+# Carregamento dos Dados
+# Carregamos o dataset
 df = pd.read_csv('dataset.csv')
 
-# Separar features 
+# Separando caracteristicas e rotulos 
 X = df.iloc[:, :-1].values  
 y = df['label'].values 
 
-# modificar os rótulos em números
+# modificando os rótulos em números
 codificador_rotulos = LabelEncoder()
 y_codificado = codificador_rotulos.fit_transform(y)  # Converte rótulos para números (ex: 'A' -> 0, 'B' -> 1)
 
-# Converter rótulos 
+# Convertendo os  rótulos 
 y_one_hot = to_categorical(y_codificado)
 
 # Divisão em treino e teste
@@ -33,7 +33,7 @@ print(f"X_treino: {X_treino.shape}, y_treino: {y_treino.shape}")
 print(f"X_teste: {X_teste.shape}, y_teste: {y_teste.shape}")'''
 
 
-# Criar o modelo
+# Criando o modelo
 modelo = Sequential([
     Dense(128, activation='relu', input_shape=(X_treino.shape[1],)),  # Camada de entrada
     Dropout(0.2),  # Regularização para evitar overfitting
@@ -43,7 +43,7 @@ modelo = Sequential([
     Dense(y_one_hot.shape[1], activation='softmax')  (softmax para classificação)
 ])
 
-# Compilar o modelo
+# Compilando o modelo
 modelo.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 '''# Resumo do modelo
@@ -51,36 +51,36 @@ print("\nResumo do modelo:")
 modelo.summary()'''
 
 
-# Treinar o modelo
+# Treinando o modelo
 historico = modelo.fit(
     X_treino, y_treino,
     epochs=50,  # Número de épocas
     batch_size=32,  # Tamanho do lote
     validation_data=(X_teste, y_teste),  # Dados de validação
-    verbose=1  # Mostrar progresso
+    verbose=1  # progresso
 )
 
-'''# Salvar o histórico de treinamento
+'''# Salva o histórico de treinamento
 with open('historico_treinamento.pkl', 'wb') as f:
     pickle.dump(historico.history, f)
 
 
-# Avaliar o modelo no conjunto de teste
+# Avalia o modelo no conjunto de teste
 perda, acuracia = modelo.evaluate(X_teste, y_teste, verbose=0)
 print(f"\nAcurácia no conjunto de teste: {acuracia * 100:.2f}%")
 
-# 6. Visualização das Métricas
-# Carregar o histórico de treinamento
+# Visualiza as Métricas
+# Carrega o histórico de treinamento
 with open('historico_treinamento.pkl', 'rb') as f:
     historico = pickle.load(f)
 
-# Plotar a loss de treino e validação
+# Plota a loss de treino e validação
 plt.figure(figsize=(12, 5))
 
 plt.subplot(1, 2, 1)
 plt.plot(historico['loss'], label='Train Loss')
 plt.plot(historico['val_loss'], label='Validation Loss')
-plt.title('Loss ao Longo das Épocas')
+plt.title('Loss durante as Épocas')
 plt.xlabel('Épocas')
 plt.ylabel('Loss')
 plt.legend()
@@ -89,7 +89,7 @@ plt.legend()
 plt.subplot(1, 2, 2)
 plt.plot(historico['accuracy'], label='Train Accuracy')
 plt.plot(historico['val_accuracy'], label='Validation Accuracy')
-plt.title('Acurácia ao Longo das Épocas')
+plt.title('Acurácia durante as Épocas')
 plt.xlabel('Épocas')
 plt.ylabel('Acurácia')
 plt.legend()
@@ -97,7 +97,6 @@ plt.legend()
 plt.tight_layout()
 plt.show()'''
 
-# 7. Salvamento do Modelo
-# Salvar o modelo treinado
-modelo.save('modelo_treinado.h5')
-print("\nModelo treinado salvo com sucesso!")
+#Salvando o Modelo
+modelo.save('modelo_libras.h5')
+print("\nModelo libras salvo com sucesso!")

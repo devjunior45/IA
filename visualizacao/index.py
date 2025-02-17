@@ -22,7 +22,7 @@ detalhes_saida = interpretador.get_output_details()
 mp_maos = mp.solutions.hands
 maos = mp_maos.Hands()
 
-# Capturando um video ja salvo, 0 para camera
+# Capturando um video ja salvo ou 0 para camera
 captura = cv2.VideoCapture("caminho video, 0 para a camera")
 
 while captura.isOpened():

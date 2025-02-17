@@ -11,7 +11,7 @@ dicionario_gestos = {
 }
 
 # Carregando o modelo TensorFlow Lite
-interpretador = tf.lite.Interpreter(model_path='modelolibraslite.tflite')
+interpretador = tf.lite.Interpreter(model_path='modelos/modelolibraslite.tflite')
 interpretador.allocate_tensors()
 
 # detalhes de entrada/saída

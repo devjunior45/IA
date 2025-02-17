@@ -98,16 +98,98 @@ historico = modelo.fit(
     verbose=1  # Mostrar progresso
 )
 
-# resultado do aprendizado
+ #Resultado do aprendizado
 perda, acuracia = modelo.evaluate(X_teste, y_teste, verbose=0)
 print(f"\nAcurácia no conjunto de teste: {acuracia * 100:.2f}%")
-
 ```
-
 ## Salvando o modelo 
 - agora salvamos o modelo.
-- ``` modelo.save('modelo_libras.h5')
+- 
+- ```
+  modelo.save('modelo_libras.h5')
 print("\nModelo salvo com sucesso!")
+```
+
+## Interface
+-criamos uma simples interface, para fazer a previsão das letras
+```
+import cv2
+import mediapipe as mp
+import numpy as np
+import tensorflow as tf
+
+# Dicionário das letras que tenho no dataset, para traduzir os numeros em letras
+dicionario_gestos = {
+    0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'I', 8: 'L',
+    9: 'M', 10: 'N', 11: 'O', 12: 'P', 13: 'Q', 14: 'R', 15: 'S', 16: 'T',
+    17: 'U', 18: 'V', 19: 'W', 20: 'Y'
+}
+
+# Carrega o modelo TensorFlow Lite
+interpretador = tf.lite.Interpreter(model_path='modelolibraslite.tflite')
+interpretador.allocate_tensors()
+
+# Obtem detalhes de entrada/saída
+detalhes_entrada = interpretador.get_input_details()
+detalhes_saida = interpretador.get_output_details()
+
+# carregar o  MediaPipe Hands
+mp_maos = mp.solutions.hands
+maos = mp_maos.Hands()
+
+# Captura vídeo salvo, 0 para a camera 
+captura = cv2.VideoCapture("teste4.mp4")
+
+while captura.isOpened():
+    sucesso, imagem = captura.read()
+    if not sucesso:
+        break
+
+    imagem = cv2.flip(imagem, 0)
+    # Converte a imagem para RGB
+    imagem_rgb = cv2.cvtColor(imagem, cv2.COLOR_BGR2RGB)
+    
+    # Processa a imagem 
+    resultados = maos.process(imagem_rgb)
+
+    # Verificação das mãos 
+    if resultados.multi_hand_landmarks:
+        for marcos_mao in resultados.multi_hand_landmarks:
+            # Extrai as  coordenadas dos landmarks
+            coordenadas = []
+            for marco in marcos_mao.landmark:
+                coordenadas.extend([marco.x, marco.y, marco.z])
+            
+            # Prepara os dados
+            dados_entrada = np.array([coordenadas], dtype=np.float32)
+            
+        
+            interpretador.set_tensor(detalhes_entrada[0]['index'], dados_entrada)
+            interpretador.invoke()
+            dados_saida = interpretador.get_tensor(detalhes_saida[0]['index'])
+            
+            # prever a letra
+            classe_prevista = np.argmax(dados_saida, axis=1)
+            rotulo_previsto = dicionario_gestos.get(classe_prevista[0], 'Desconhecido')  # Traduz números para letras
+            
+          
+            cv2.putText(imagem, f"Letra: {rotulo_previsto}", (10, 50),
+            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 3)  
+
+
+            # Desenhar os landmarks na imagem
+            mp.solutions.drawing_utils.draw_landmarks(
+                imagem, marcos_mao, mp_maos.HAND_CONNECTIONS)
+
+    # Mostrar a imagem
+    cv2.imshow('Reconhecimento de Gestos', imagem)
+    if cv2.waitKey(5) & 0xFF == 27:  # Pressione ESC para sair
+        break
+
+captura.release()
+cv2.destroyAllWindows()
+```
+
 
 
 

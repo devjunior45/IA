@@ -102,17 +102,18 @@ historico = modelo.fit(
 perda, acuracia = modelo.evaluate(X_teste, y_teste, verbose=0)
 print(f"\nAcurácia no conjunto de teste: {acuracia * 100:.2f}%")
 ```
+
 ## Salvando o modelo 
-- agora salvamos o modelo.
-- 
+- agora salvamos o modelo. 
 - ```
-  modelo.save('modelo_libras.h5')
+modelo.save('modelo_libras.h5')
 print("\nModelo salvo com sucesso!")
-```
+- ```
 
 ## Interface
 -criamos uma simples interface, para fazer a previsão das letras
-```
+
+- ```
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -188,7 +189,7 @@ while captura.isOpened():
 
 captura.release()
 cv2.destroyAllWindows()
-```
+- ```
 
 
 

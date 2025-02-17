@@ -10,7 +10,7 @@ import pickle
 
 # Carregamento dos Dados
 # Carregamos o dataset
-df = pd.read_csv('dataset.csv')
+df = pd.read_csv('dataset/dataset.csv')
 
 # Separando caracteristicas e rotulos 
 X = df.iloc[:, :-1].values  
